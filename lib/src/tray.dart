@@ -33,6 +33,7 @@ class SystemTray {
   }
 
   static const MethodChannel _platformChannel = MethodChannel(_kChannelName);
+  static final Uuid _uuid = Uuid();
 
   ///
   SystemTrayEventCallback? _systemTrayEventCallback;
@@ -47,7 +48,7 @@ class SystemTray {
     bool value = await _platformChannel.invokeMethod(
       _kInitSystemTray,
       <String, dynamic>{
-        _kTrayIdKey: const Uuid().v1(),
+        _kTrayIdKey: _uuid.v1(),
         _kTitleKey: title,
         _kIconPathKey: await Utils.getIcon(iconPath),
         _kToolTipKey: toolTip,
